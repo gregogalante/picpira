@@ -6,6 +6,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Title
+
+$TITLE = 'Picpira';
+
 // Version
 
 $VERSION = '1.0.0';

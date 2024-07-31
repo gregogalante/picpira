@@ -9,8 +9,9 @@ require_once 'config.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Picpira</title>
+    <title><?php echo $TITLE; ?></title>
 
+    <meta name="$TITLE" content="<?php echo $TITLE; ?>">
     <meta name="$VERSION" content="<?php echo $VERSION; ?>">
     <meta name="$DIRECTORY_PATH" content="<?php echo $DIRECTORY_PATH; ?>">
 

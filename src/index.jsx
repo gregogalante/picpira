@@ -2,12 +2,14 @@ import React, { createContext, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
+export const TITLE = document.querySelector('meta[name="$TITLE"]').content
 export const VERSION = document.querySelector('meta[name="$VERSION"]').content
 export const DIRECTORY_PATH = document.querySelector('meta[name="$DIRECTORY_PATH"]').content
 
 // Routes
 ////////////////////////////////////////
 
+import ErrorPage from './pages/ErrorPage'
 import HomePage from './pages/HomePage'
 import SignInPage from './pages/SigninPage'
 import SignupPage from './pages/SignupPage'
@@ -16,26 +18,29 @@ import RecoverPasswordUpdatePage from './pages/RecoverPasswordUpdatePage'
 
 const AppRouter = createBrowserRouter([
   {
-    path: DIRECTORY_PATH,
+    path: '/',
     element: <HomePage />,
+    errorElement: <ErrorPage />,
   },
   {
-    path: `${DIRECTORY_PATH}signin`,
+    path: `/signin`,
     element: <SignInPage />,
   },
   {
-    path: `${DIRECTORY_PATH}signup`,
+    path: `/signup`,
     element: <SignupPage />,
   },
   {
-    path: `${DIRECTORY_PATH}recover-password`,
+    path: `/recover-password`,
     element: <RecoverPasswordPage />,
   },
   {
-    path: `${DIRECTORY_PATH}recover-password/update`,
+    path: `/recover-password/update`,
     element: <RecoverPasswordUpdatePage />,
   },
-])
+], {
+  basename: DIRECTORY_PATH
+})
 
 // Context
 ////////////////////////////////////////
@@ -54,6 +59,7 @@ export const AppProvider = ({ children }) => {
 ////////////////////////////////////////
 
 function App() {
+  console.log('TITLE:', TITLE)
   console.log('VERSION:', VERSION)
   console.log('DIRECTORY_PATH:', DIRECTORY_PATH)
 
