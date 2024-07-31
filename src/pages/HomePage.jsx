@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { TITLE } from '../'
+import { TITLE } from '..'
 import ContainerComponent from '../components/ContainerComponent'
 import TitleComponent from '../components/TitleComponent'
 import ButtonComponent from '../components/ButtonComponent'

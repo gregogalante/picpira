@@ -18,13 +18,13 @@ function db_setup() {
   // Create table auth_data if it doesn't exist with the following columns:
   // id (INT, AUTO_INCREMENT, PRIMARY KEY)
   // auth_id (INT, FOREIGN KEY auth(id))
-  // key (VARCHAR 255, NOT NULL)
+  // name (VARCHAR 255, NOT NULL)
   // value (TEXT)
   $DB_CONNECTION->query('CREATE TABLE IF NOT EXISTS ' . $DB_PREFIX . 'auth_data (
     id INT AUTO_INCREMENT PRIMARY KEY,
     auth_id INT,
     FOREIGN KEY (auth_id) REFERENCES ' . $DB_PREFIX . 'auth(id),
-    key VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     value TEXT
   )');
 
@@ -82,13 +82,13 @@ function db_update_auth_password($auth_id, $password) {
   $stmt->close();
 }
 
-function db_create_auth_data($auth_id, $key, $value) {
+function db_create_auth_data($auth_id, $name, $value) {
   global $DB_CONNECTION, $DB_PREFIX;
   if (!isset($DB_CONNECTION)) throw new Exception('Database connection not set');
   if (!isset($DB_PREFIX)) throw new Exception('Database prefix not set');
 
-  $stmt = $DB_CONNECTION->prepare('INSERT INTO ' . $DB_PREFIX . 'auth_data (auth_id, key, value) VALUES (?, ?, ?)');
-  $stmt->bind_param('iss', $auth_id, $key, $value);
+  $stmt = $DB_CONNECTION->prepare('INSERT INTO ' . $DB_PREFIX . 'auth_data (auth_id, name, value) VALUES (?, ?, ?)');
+  $stmt->bind_param('iss', $auth_id, $name, $value);
   $stmt->execute();
   $stmt->close();
 
