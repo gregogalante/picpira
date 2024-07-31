@@ -19,7 +19,7 @@ export default function SigninPage() {
     try {
       const formData = new FormData(e.target)
       formData.append('action', 'authSignin')
-      const response = await fetch(`${DIRECTORY_PATH}/api.php`, {
+      const response = await fetch(`${DIRECTORY_PATH}api.php`, {
         method: 'POST',
         body: formData
       })
@@ -54,6 +54,7 @@ export default function SigninPage() {
           type="email"
           autoComplete="username"
           onFocus={() => setError(null)}
+          required
         />
 
         <InputComponent
@@ -63,6 +64,7 @@ export default function SigninPage() {
           type="password"
           autoComplete="current-password"
           onFocus={() => setError(null)}
+          required
         />
 
         <ButtonComponent

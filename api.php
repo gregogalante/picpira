@@ -4,6 +4,11 @@ require 'config.php';
 require 'db.php';
 require 'helpers.php';
 
+$DB_CONNECTION = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+if ($DB_CONNECTION->connect_error) {
+  die("Connection failed: " . $DB_CONNECTION->connect_error);
+}
+
 // require all files on folder actions
 foreach (glob("actions/*.php") as $filename) {
   require $filename;

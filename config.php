@@ -1,10 +1,11 @@
 <?php
 
-// PHP Error Reporting
+// PHP Development settings
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+header('Cache-Control: no-cache, no-store, must-revalidate');
 
 // Title
 
@@ -16,17 +17,15 @@ $VERSION = '1.0.0';
 
 // Directory path
 
-$DIRECTORY_PATH = '/picpira/';
+$DIRECTORY_PATH = '/';
 
 // Database Connection
 
-$DB_NAME = 'local';
+$DB_NAME = 'mydb';
 $DB_USER = 'root';
-$DB_PASSWORD = 'root';
+$DB_PASSWORD = 'rootpassword';
 $DB_HOST = 'localhost';
 $DB_PREFIX = 'picpira_';
-
-$DB_CONNECTION = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 
 // Secret Key
 
