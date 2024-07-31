@@ -9,7 +9,7 @@ html, body, #root {
   justify-self: center;
   align-items: center;
   background-color: #222;
-  background: linear-gradient(180deg, #222000 0%, #444 100%);
+  background: linear-gradient(180deg, #222, #333, #222);
   animation: gradient 15s ease infinite;
 }
 
