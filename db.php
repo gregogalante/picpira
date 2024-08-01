@@ -101,7 +101,7 @@ function db_get_last_auth_recover_password($auth_id) {
   if (!isset($DB_PREFIX)) throw new Exception('Database prefix not set');
 
   $stmt = $DB_CONNECTION->prepare('SELECT * FROM ' . $DB_PREFIX . 'auth_recover_password WHERE auth_id = ? ORDER BY created_at DESC LIMIT 1');
-  stmt->bind_param('s', $auth_id);
+  $stmt->bind_param('s', $auth_id);
   $stmt->execute();
   $result = $stmt->get_result();
   $stmt->close();
