@@ -22,9 +22,9 @@ $DIRECTORY_PATH = '/';
 // Database Connection
 
 $DB_NAME = 'picpira';
-$DB_USER = 'root';
-$DB_PASSWORD = 'password';
-$DB_HOST = '127.0.0.1';
+$DB_USER = 'picpira';
+$DB_PASSWORD = 'picpira';
+$DB_HOST = 'mysql';
 $DB_PREFIX = 'picpira_';
 
 // Secret Key

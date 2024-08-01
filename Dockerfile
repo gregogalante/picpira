@@ -3,7 +3,6 @@ FROM php:8.2-apache
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    default-mysql-server \
     default-mysql-client \
     libpng-dev \
     libjpeg-dev \
@@ -27,18 +26,4 @@ COPY . /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 # Expose ports
-EXPOSE 80 3306
-
-# Set MYSQL_ROOT_PASSWORD environment variable
-ENV MYSQL_ROOT_PASSWORD=password
-
-# Edit php.ini file to set the mysql default socket
-RUN echo "mysqli.default_socket=/run/mysqld/mysqld.sock" >> /usr/local/etc/php/php.ini
-RUN echo "mysql.default_socket=/run/mysqld/mysqld.sock" >> /usr/local/etc/php/php.ini
-
-# Create start script
-COPY Dockerstart.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/Dockerstart.sh
-
-# Set the entry point
-CMD ["/usr/local/bin/Dockerstart.sh"]
+EXPOSE 80

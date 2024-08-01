@@ -12,13 +12,9 @@ PHP + React reserved area boilerplate.
 
 - Clone the repository on your server and copy the files to the desired folder
 
-## Run locally PHP
+## Run locally
 
-- Build the docker image with `docker build -t picpira .`
-
-- Run the docker container with `docker run -p 80:80 -v $(pwd):/var/www/html picpira`
-
-## Run locally React
+- Run the docker compose with `docker-compose up -d`
 
 - Install npm dependencies with `npm install`
 
