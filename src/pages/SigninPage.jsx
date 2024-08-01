@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { DIRECTORY_PATH } from '..'
+import { AppContext, DIRECTORY_PATH } from '..'
 import ContainerComponent from '../components/ContainerComponent'
 import TitleComponent from '../components/TitleComponent'
 import InputComponent from '../components/InputComponent'
@@ -11,6 +11,7 @@ export default function SigninPage() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const appContext = useContext(AppContext)
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -26,7 +27,8 @@ export default function SigninPage() {
       const responseJson = await response.json()
       if (!responseJson.success) throw new Error(responseJson.error)
 
-      console.log(responseJson)
+      await appContext.updateStateKey('authToken', responseJson.data.token)
+      navigate('/')
     } catch (error) {
       console.error(error)
       setError(error.message)

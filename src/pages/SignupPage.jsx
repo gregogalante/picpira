@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { DIRECTORY_PATH } from '..'
+import { AppContext, DIRECTORY_PATH } from '..'
 import ContainerComponent from '../components/ContainerComponent'
 import TitleComponent from '../components/TitleComponent'
 import InputComponent from '../components/InputComponent'
 import ButtonComponent from '../components/ButtonComponent'
 import AlertComponent from '../components/AlertComponent'
 
-export default function SigninPage() {
+export default function SignupPage() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const appContext = useContext(AppContext)
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -19,14 +20,19 @@ export default function SigninPage() {
     try {
       const formData = new FormData(e.target)
       formData.append('action', 'authSignup')
-      const response = await fetch(`${DIRECTORY_PATH}/api.php`, {
+
+      const emailValue = formData.get('email')
+      formData.append('username', emailValue)
+
+      const response = await fetch(`${DIRECTORY_PATH}api.php`, {
         method: 'POST',
         body: formData
       })
       const responseJson = await response.json()
       if (!responseJson.success) throw new Error(responseJson.error)
 
-      console.log(responseJson)
+      await appContext.updateStateKey('authToken', responseJson.data.authToken)
+      navigate('/')
     } catch (error) {
       console.error(error)
       setError(error.message)
@@ -48,12 +54,37 @@ export default function SigninPage() {
         onSubmit={onSubmit}
       >
         <InputComponent
+          label="First name"
+          id="first_name"
+          name="first_name"
+          onFocus={() => setError(null)}
+          required
+        />
+
+        <InputComponent
+          label="Last name"
+          id="last_name"
+          name="last_name"
+          onFocus={() => setError(null)}
+          required
+        />
+
+        <InputComponent
+          label="Phone"
+          id="phone"
+          name="phone"
+          onFocus={() => setError(null)}
+          required
+        />
+
+        <InputComponent
           label="Email"
-          id="username"
-          name="username"
+          id="email"
+          name="email"
           type="email"
           autoComplete="username"
           onFocus={() => setError(null)}
+          required
         />
 
         <InputComponent
@@ -63,6 +94,7 @@ export default function SigninPage() {
           type="password"
           autoComplete="current-password"
           onFocus={() => setError(null)}
+          required
         />
 
         <ButtonComponent

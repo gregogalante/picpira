@@ -5,7 +5,13 @@ function action_authSignup() {
   if (!isset($AUTH_DATA)) throw new Exception('Auth data not set');
 
   // find the $AUTH_DATA key that has 'username' set to true
-  $username_key = array_search(true, array_column($AUTH_DATA, 'username'));
+  $username_key = null;
+  foreach ($AUTH_DATA as $key => $value) {
+    if (isset($value['username']) && $value['username']) {
+      $username_key = $key;
+      break;
+    }
+  }
   if (!$username_key) throw new Exception('Username not set');
 
   // validate required fields
