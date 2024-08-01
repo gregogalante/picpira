@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # Start MySQL
-service mysql start
+service mariadb start
 
-# Initialize MySQL
-mysql -u root << EOF
-CREATE DATABASE IF NOT EXISTS mydb;
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'rootpassword';
-FLUSH PRIVILEGES;
-EOF
+# Wait for MySQL to be ready
+while ! mysqladmin ping -h"localhost" --silent; do
+  sleep 1
+done
+
+# Create a new database called "picpira"
+mysql -u root -ppassword -e "CREATE DATABASE IF NOT EXISTS picpira;"
 
 # Start Apache in foreground
 apache2-foreground
