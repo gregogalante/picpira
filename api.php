@@ -1,5 +1,9 @@
 <?php
 
+require 'lib/phpmailer/src/Exception.php';
+require 'lib/phpmailer/src/PHPMailer.php';
+require 'lib/phpmailer/src/SMTP.php';
+
 require 'config.php';
 require 'db.php';
 require 'helpers.php';

@@ -82,6 +82,20 @@ function db_update_auth_password($auth_id, $password) {
   $stmt->close();
 }
 
+function db_get_auth_data_value($auth_id, $name) {
+  global $DB_CONNECTION, $DB_PREFIX;
+  if (!isset($DB_CONNECTION)) throw new Exception('Database connection not set');
+  if (!isset($DB_PREFIX)) throw new Exception('Database prefix not set');
+
+  $stmt = $DB_CONNECTION->prepare('SELECT value FROM ' . $DB_PREFIX . 'auth_data WHERE auth_id = ? AND name = ?');
+  $stmt->bind_param('is', $auth_id, $name);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $stmt->close();
+
+  return $result->fetch_assoc()['value'];
+}
+
 function db_create_auth_data($auth_id, $name, $value) {
   global $DB_CONNECTION, $DB_PREFIX;
   if (!isset($DB_CONNECTION)) throw new Exception('Database connection not set');

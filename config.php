@@ -31,6 +31,14 @@ $DB_PREFIX = 'picpira_';
 
 $SECRET_KEY = 'secret';
 
+// SMTP settings
+
+$SMTP_HOST = 'smtp.mailtrap.io';
+$SMTP_PORT = 2525;
+$SMTP_USERNAME = 'username';
+$SMTP_PASSWORD = 'password';
+$SMTP_FROM = 'picpira@mail.com';
+
 // Auth data
 
 $AUTH_DATA = array(
@@ -42,7 +50,8 @@ $AUTH_DATA = array(
   ),
   'email' => array(
     'required' => true,
-    'username' => true
+    'username' => true,
+    'email' => true
   ),
   'phone' => array(
     'required' => true
